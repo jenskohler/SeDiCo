@@ -1,0 +1,103 @@
+@charset "utf-8";
+
+html,
+body{
+	margin:0;
+	padding:0;	
+	height:100%;	
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+}
+
+#container {	
+	height:150px;
+	background-color:#b2d9ff;	
+}
+
+#head {
+	width:800px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#head_seperator {
+	height:5px;
+	background-color:#004991;
+}
+
+#content {
+	padding:25px 0px 25px 0px;
+	width:800px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#footer {
+	width:800px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+ul#navi{
+	float:right;
+	padding: 65px 0px 0px 0px;
+	margin: 0px;	
+}
+
+ul#navi li{
+	padding: 0px 0px 0px 20px;	
+	float: left;
+	list-style: none;
+}
+
+ul#navi a, ul#navi a:link, ul#navi a:visited{
+	color:#FFF;
+	font-size:18px;
+	text-decoration:none;
+	text-transform:none;
+}
+
+ul#navi a:hover{
+	color:#004991;
+	font-size:18px;
+	text-decoration:none;
+	text-transform:none;
+}
+
+hr{
+	height:2px;
+	color:#004991;
+	background-color:#004991;
+}
+
+h1{
+	font-size:24px;	
+	padding:0px 0px 10px 0px;
+}
+
+table.add{
+	border-collapse:collapse;
+	width:100%;
+	margin:0px 0px 25px 0px;
+}
+
+table.add td {
+	border: 2px solid #004991;
+	padding:10px;
+	margin:0;
+	text-align:center;
+	font-weight:bold;
+	font-size:14px;
+	background-color:#b2d9ff;
+	color:#FFF;
+}
+
+table td.space {
+	border-bottom:hidden;
+	border-top:hidden;
+	background-color:#FFF;
+}
+
+#slider {
+	width:800px;
+}

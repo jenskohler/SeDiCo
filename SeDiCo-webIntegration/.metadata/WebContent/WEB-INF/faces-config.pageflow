@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13432185416970" configfile="/SeDiCo-web/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="protected/protected.xhtml" x="122" y="178" id="pf135947660997310" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" path="/protected/protected.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="AuthorizationError.xhtml" x="122" y="562" id="pf13594963990330" referenceLink="//@navigationRule.1/@fromViewId|" path="AuthorizationError.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="163" y="408" id="pf13594963990332" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" path="index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="946" id="pf13594963990333" outlinks="pf13595562489910" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="logout" x="122" y="1714" id="pf13594963990335" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" path="logout.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="logout" x="338" y="946" id="pf13595562489911" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13595562489910" path="/logout.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="AuthorizationError.xhtml" x="122" y="2098" id="pf13595562489912" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf13595562489913" path="/AuthorizationError.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="2098" id="pf13595562489914" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf13595562489913" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="474" y="190" id="pf13595591707826" path="/login.xhtml"/>
+  <links id="pf13595562489910" target="pf13595562489911" source="pf13594963990333" outcome="logout" redirect="true" fromaction="#{loginBean.logout}"/>
+  <links id="pf13595562489913" target="pf13595562489914" source="pf13595562489912" outcome="start" redirect="true"/>
+</pageflow:Pageflow>

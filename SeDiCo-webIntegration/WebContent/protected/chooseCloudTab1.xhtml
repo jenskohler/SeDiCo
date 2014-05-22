@@ -1,0 +1,168 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:tab id="tab1" title="Amazon" disabled="#{amazonCloudService.disableTab1}" >
+		<h:form >
+			<h:panelGrid columns="2" >
+
+				<h:outputLabel for="ama_access-key" disabled="#{amazonCloudService.disableTab1}" >Access-Key:</h:outputLabel>
+				<p:inputText id="ama_access-key" size="50"
+					value="#{amazonCloudService.amaAccessKey}" 
+					required="true" redisplay="true" disabled="#{amazonCloudService.disableTab1}" />
+				
+
+				<h:outputLabel for="ama_user-key" disabled="#{amazonCloudService.disableTab1}" >User-Key:</h:outputLabel>
+				<p:password id="ama_user-key" size="50"
+					value="#{amazonCloudService.amaUserKey}" 
+					required="true" redisplay="true" disabled="#{amazonCloudService.disableTab1}" />
+				
+			</h:panelGrid>
+			<h:panelGrid></h:panelGrid>
+			<h:message for="ama_access-key" />
+			<h:message for="ama_user-key" />
+			<h:panelGrid columns="1" >
+				<p:fieldset legend="(experimental)" > 
+					<h:panelGrid columns="1" style="margin-bottom:10px" >
+					<h:outputText id="chooseCloudOSamazon1" value="Cloud OS: " disabled="#{amazonCloudService.disableTab1}" />
+					<p:selectOneMenu id="cloudOSChooseamazon1" value="#{amazonCloudService.amazon1os}" style="width:205px" disabled="#{amazonCloudService.disableTab1}">
+						<f:selectItem itemLabel="Ubuntu" itemValue="UBUNTU" />
+						<f:selectItem itemLabel="Windows" itemValue="WINDOWS" />
+						<f:selectItem itemLabel="CentOS" itemValue="CENTOS" />
+						<f:selectItem itemLabel="Debian" itemValue="DEBIAN" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+					
+					<h:panelGrid columns="1" style="margin-bottom:10px">
+					<h:outputText value="RAM (MB): " disabled="#{amazonCloudService.disableTab1}"/>
+						<p:inputText id="chooseCloudRamamazon1"
+							value="#{amazonCloudService.amazon1ram}" disabled="#{amazonCloudService.disableTab1}"/>
+						<p:slider for="chooseCloudRamamazon1" minValue="128"
+							maxValue="8192" step="128" disabled="#{amazonCloudService.disableTab1}"/>
+					</h:panelGrid>
+	
+					<h:outputText value="# Procs (GHz): " disabled="#{amazonCloudService.disableTab1}"/>
+					<h:panelGrid columns="1" style="margin-bottom:10px">
+						<p:inputText id="cloudProcsamazon1" disabled="#{amazonCloudService.disableTab1}"
+							value="#{amazonCloudService.amazon1procs}" />
+						<p:slider for="cloudProcsamazon1" step="2" minValue="1"
+							maxValue="12" disabled="#{amazonCloudService.disableTab1}"/>
+					</h:panelGrid>
+	
+					<h:outputText value="HD (GB):  " disabled="#{amazonCloudService.disableTab1}" />
+					<h:panelGrid columns="1" style="margin-bottom:10px">
+						<p:inputText id="chooseCloudHdamazon1" disabled="#{amazonCloudService.disableTab1}"
+							value="#{amazonCloudService.amazon1harddisk}" />
+						<p:slider for="chooseCloudHdamazon1" minValue="1" maxValue="4000"
+							step="1" disabled="#{amazonCloudService.disableTab1}"/>
+						
+						<h:commandButton value="Filter Resources" disabled="#{amazonCloudService.disableTab1}"
+					 />	
+							
+					</h:panelGrid>
+				</p:fieldset>
+				<h:commandButton value="Search Resources" disabled="#{amazonCloudService.disableTab1}"
+					action="#{amazonCloudService.cloudLogin}" />
+				
+ 			
+
+			</h:panelGrid>
+		</h:form>
+				<p:tabView rendered="#{amazonCloudService.showCloudTab}">
+					<p:tab id="tab11" title="Instances" disabled="#{amazonCloudService.disableTab1}">
+						<p:outputPanel id="tab11Panel" >
+						<h:form>
+							<p:selectOneMenu id="custom11Radio" style="width:700px"  filter="true" filterMatchMode="startsWith" panelStyle="width:200px"
+								value="#{amazonCloudService.selectedAma1ImageId}" disabled="#{amazonCloudService.disableTab1}"
+								layout="custom"  >
+								<p:ajax event="change" listener="#{amazonCloudService.changeVMSelection1}" update="publicAmaIp1"/>
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{amazonCloudService.myNodesAma}"
+									var="nodes" itemValue="#{nodes.id}" itemLabel="#{nodes.id}"
+									noSelectionValue="#"  />
+								
+							</p:selectOneMenu>
+							
+						
+						
+							
+							<h:panelGrid  columns="2" style="margin-bottom:10px">
+								<h:outputText value="Public IP: " disabled="#{amazonCloudService.disableTab1}" />
+								<h:inputText id="publicAmaIp1" disabled="#{amazonCloudService.disableTab1}" value="#{amazonCloudService.publicIp1}" />
+								
+								<h:outputLabel for="port1" disabled="#{amazonCloudService.disableTab1}" >Port:</h:outputLabel>
+								<h:inputText id="port1" disabled="#{amazonCloudService.disableTab1}" value="#{amazonCloudService.port1}" />
+								
+								<h:outputText value="DB-Name: " disabled="#{amazonCloudService.disableTab1}" />
+								<h:inputText id="dbName1" value="#{amazonCloudService.dbName1}" disabled="#{amazonCloudService.disableTab1}" />
+								
+								<h:outputText value="PartitionName: " disabled="#{amazonCloudService.disableTab1}" />
+								<h:inputText id="partitionName1" value="#{amazonCloudService.partitionName1}" disabled="#{amazonCloudService.disableTab1}" />
+								
+								<h:outputText value="DB-User: " disabled="#{amazonCloudService.disableTab1}" />
+								<h:inputText id="dbUser1" value="#{amazonCloudService.dbUser1}" disabled="#{amazonCloudService.disableTab1}" />
+								
+									<h:outputText value="Password: "  disabled="#{amazonCloudService.disableTab1}" />
+									<h:inputSecret id="dbPassword1" value="#{amazonCloudService.dbPassword1}" redisplay="true" disabled="#{amazonCloudService.disableTab1}" />
+						
+								<h:outputText value="DB-Type: " disabled="#{amazonCloudService.disableTab1}" />
+						        <h:selectOneMenu  id="amaDBTypePart1" disabled="#{amazonCloudService.disableTab1}"
+						           noSelectionValue="#" value="#{amazonCloudService.dbType1}">
+						           	<p:ajax event="change" listener="#{amazonCloudService.changeDatabaseSelection1}" update="amaDBTypePart1"/>
+						            <f:selectItem itemLabel="MySQL" itemValue="mysql" />  
+						            <f:selectItem itemLabel="Oracle" itemValue="oracle" />   
+						        </h:selectOneMenu>  
+										
+										
+								<h:commandButton value="Use Instance"
+									action="#{amazonCloudService.loadInstanceData1}" disabled="#{amazonCloudService.disableTab1}">
+								</h:commandButton>		
+									<br />		
+									<br />	
+									
+							
+							
+							</h:panelGrid>
+							</h:form>
+						</p:outputPanel>
+							
+							
+							
+					</p:tab>
+
+					<p:tab id="tab12" title="Templates (experimental)" disabled="#{amazonCloudService.disableTab1}">
+						<p:outputPanel id="tab12Panel" >
+							<p:selectOneMenu id="ama12TemplateRadio" style="width:700px"  filter="true" filterMatchMode="startsWith" panelStyle="width:200px"
+								value="#{amazonCloudService.selectedTemplateAma1}" layout="custom">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{amazonCloudService.myTemplatesAma}"
+									var="templates" itemValue="#{templates}" 
+									itemLabel="ID: #{templates.hardware.id} || Procs: #{templates.hardware.processors} || RAM: #{templates.hardware.ram} || Vols: #{templates.hardware.volumes}"
+									noSelectionValue="#" />
+
+							</p:selectOneMenu>
+						</p:outputPanel>
+					</p:tab>
+					
+					<p:tab id="tab13" title="Images (experimental)" disabled="#{amazonCloudService.disableTab1}">
+						<p:outputPanel id="tab13Panel" >
+						<h:outputText value="Found Images: #{amazonCloudService.foundImages}" />
+							<p:selectOneMenu id="custom13RadioImages" style="width:700px"  filter="true" filterMatchMode="startsWith" panelStyle="width:200px"
+								value="#{amazonCloudService.selectedImageAma1}" layout="custom">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{amazonCloudService.myImagesAma}"
+									var="images" itemValue="#{images}" itemLabel="#{images.name}"
+									noSelectionValue="#" />
+
+							</p:selectOneMenu>
+						</p:outputPanel>
+					</p:tab>
+
+				</p:tabView>
+				
+	</p:tab>
+
+</ui:composition>

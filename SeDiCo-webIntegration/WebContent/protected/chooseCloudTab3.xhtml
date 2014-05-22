@@ -1,0 +1,142 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<p:tab id="tab3" title="Amazon">
+	<h:form>
+			<h:panelGrid columns="1">
+			<p:fieldset legend="(experimental)" > 
+			<h:panelGrid columns="1" style="margin-bottom:10px">
+				<h:outputText id="chooseCloudOSamazon2" value="Cloud OS: " />
+				<p:selectOneMenu id="cloudOSChooseamazon2" style="width:205px">
+					<f:selectItem itemLabel="Ubuntu" itemValue="UBUNTU" />
+					<f:selectItem itemLabel="Windows" itemValue="WINDOWS" />
+					<f:selectItem itemLabel="CentOS" itemValue="CENTOS" />
+					<f:selectItem itemLabel="Debian" itemValue="DEBIAN" />
+				</p:selectOneMenu>
+			</h:panelGrid>
+				
+				<h:panelGrid columns="1" style="margin-bottom:10px">
+				<h:outputText value="RAM (MB): " />
+					<p:inputText id="chooseCloudRamamazon2"
+						value="#{amazonCloudService.amazon2ram}" />
+					<p:slider for="chooseCloudRamamazon2" minValue="128"
+						maxValue="8192" step="128" />
+				</h:panelGrid>
+
+				<h:outputText value="# Procs (GHz): " />
+				<h:panelGrid columns="1" style="margin-bottom:10px">
+					<p:inputText id="cloudProcsamazon2"
+						value="#{amazonCloudService.amazon2procs}" />
+					<p:slider for="cloudProcsamazon2" step="2" minValue="1"
+						maxValue="12" />
+				</h:panelGrid>
+
+				<h:outputText value="HD (GB):  " />
+				<h:panelGrid columns="1" style="margin-bottom:10px">
+					<p:inputText id="chooseCloudHdamazon2"
+						value="#{amazonCloudService.amazon2harddisk}" />
+					<p:slider for="chooseCloudHdamazon2" minValue="1" maxValue="4000"
+						step="1" />
+				</h:panelGrid>
+
+			</p:fieldset>
+				
+
+				<h:commandButton value="Search Resources" action="#{amazonCloudService.cloudLogin}"/>
+			</h:panelGrid>
+			<p:tabView id="tabView31"
+				rendered="#{amazonCloudService.showCloudTab}">
+				
+					<p:tab id="tab31" title="Instances">
+						<p:outputPanel id="tab31Panel" width="750">
+							
+							<h:form>
+							<p:selectOneMenu id="custom31Radio" style="width:700px"  filter="true" filterMatchMode="startsWith" panelStyle="width:200px"
+								value="#{amazonCloudService.selectedAma2ImageId}" layout="custom">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{amazonCloudService.myNodesAma}"
+									var="nodes" itemValue="#{nodes.id}" itemLabel="#{nodes.id}"
+									noSelectionValue="#" />
+
+							</p:selectOneMenu>
+							
+							<h:commandButton value="Use Instance"
+								action="#{amazonCloudService.loadInstanceData2}" />
+							<h:messages></h:messages>
+						
+							
+							<h:panelGrid columns="2" style="margin-bottom:10px">
+								<h:outputText value="Public IP: " />
+								<p:inputText value="#{amazonCloudService.publicIp2}"/>
+								
+								<h:outputText value="Port: " />
+								<p:inputText value="#{amazonCloudService.port2}"/>
+								
+								<h:outputText value="DB-Name: " />
+								<p:inputText value="#{amazonCloudService.dbName2}"
+									 />
+								
+								<h:outputText value="PartitionName: " />
+									<p:inputText value="#{amazonCloudService.partitionName2}"
+										 />
+								
+								<h:outputText value="DB-User: " />
+									<p:inputText value="#{amazonCloudService.dbUser2}"
+										 />
+								
+								<h:outputText value="Password: " />
+								<p:password value="#{amazonCloudService.dbPassword2}" redisplay="true"
+									 />
+						
+								<h:outputText value="DB-Type: " />
+						        <p:selectOneMenu  id="amaDBTypePart2"
+						           noSelectionValue="#" value="#{amazonCloudService.dbType2}">
+						            <f:selectItem itemLabel="MySQL" itemValue="mysql" />  
+						            <f:selectItem itemLabel="Oracle" itemValue="oracle" />   
+						        </p:selectOneMenu>  
+														
+								
+							</h:panelGrid>
+				
+							</h:form>
+						</p:outputPanel>
+					</p:tab>
+
+					<p:tab id="tab22" title="Templates (experimental)">
+						<p:outputPanel id="tab32Panel" width="750">
+							<p:selectOneMenu id="ama32TemplateRadio" style="width:700px"  filter="true" filterMatchMode="startsWith" panelStyle="width:200px"
+								value="#{amazonCloudService.selectedTemplateAma2}" layout="custom">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{amazonCloudService.myTemplatesAma}"
+									var="templates" itemValue="#{templates}" 
+									itemLabel="ID: #{templates.hardware.id} || Procs: #{templates.hardware.processors} || RAM: #{templates.hardware.ram} || Vols: #{templates.hardware.volumes}"
+									noSelectionValue="#" />
+
+							</p:selectOneMenu>
+						</p:outputPanel>
+					</p:tab>
+					
+					<p:tab id="tab23" title="Images (experimental)">
+						<p:outputPanel id="tab33Panel" width="750">
+						<h:outputText value="Found Images: #{amazonCloudService.foundImages}" />
+							<p:selectOneMenu id="custom33RadioImages" style="width:700px"  filter="true" filterMatchMode="startsWith" panelStyle="width:200px"
+								value="#{amazonCloudService.selectedImageAma2}" layout="custom">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{amazonCloudService.myImagesAma}"
+									var="images" itemValue="#{images}" itemLabel="#{images.name}"
+									noSelectionValue="#" />
+
+							</p:selectOneMenu>
+						</p:outputPanel>
+					</p:tab>
+			</p:tabView>
+			</h:form>
+	</p:tab>
+
+</ui:composition>

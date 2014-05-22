@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Welcome to SeDiCo</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="refresh" content="15" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Expires" content="0" />
+	<link rel="stylesheet" type="text/css" href="css/defaultStyle.css"></link>
+</h:head>
+
+
+<h:body>
+	<div id="container">
+
+		<div id="head">
+
+			<a href="index.xhtml"><img src="/SeDiCo-webIntegration/img/head_logo.png"
+				alt="SeDiCo ." /></a>
+
+			<ul id="navi">
+				<li><h:link outcome="protected/protected_index.xhtml" value="Login" /></li>
+				<li><h:link outcome="register.xhtml" value="Register" /></li>
+			</ul>
+
+		</div>
+
+	</div>
+
+
+	<div id="content">
+		<h1>„SeDiCo“: Mehr Datensicherheit in der
+			Cloud</h1>
+
+		<p>Cloud-Computing verspricht durch die dynamische Zuweisung von
+			Speicherplatz und Rechenleistung einen effizienteren
+			Ressourceneinsatz. Demgegenüber stehen Bedenken in puncto Datenschutz
+			und Datensicherheit. Genau hier setzt „SeDiCo“ an.</p>
+
+		<img src="img/index_idee.png" alt="SeDiCo Konzept" width="500" />
+
+			<h3>SeDiCo – A Secure and Distributed Cloud Datastore</h3>
+
+			<p>Das Forschungsprojekt des Instituts für
+				Unternehmensinformatik „SeDiCo“ verfolgt das Ziel, ein Framework zur
+				verteilten und sicheren Datenspeicherung in der Cloud zu erstellen.</p>
+
+			<p>
+				„SeDiCo“ steht für „A Secure and Distributed Cloud Datastore“. Das
+				zweijährige Projekt läuft seit Juli 2012 im Rahmen des
+				Karl-Steinbuch Forschungsprogramms und wird gefördert durch die <a
+					href="http://ksf.mfg.de/de/uber-die-mfg-stiftung" target="_blank">MFG
+					Stiftung Baden-Württemberg</a>.
+			</p>
+
+			<h3>Verteilung der Daten und deren sichere Ablage auf
+				verschiedenen Cloud-Anbietern</h3>
+
+			<p>Neu am SeDiCo-Ansatz ist die Verteilung der Daten
+				(Partitionierung) und deren Ablage auf verschiedenen
+				Cloud-Anbietern. Sollte eine Partition in falsche Hände geraten,
+				wäre diese ohne die anderen Teile wertlos.</p>
+
+			<p>Die Unterscheidung in private, öffentliche und hybride Cloud
+				wird dabei stets beachtet. Das Framework unterstützt alle
+				Ausprägungsformen der Cloud und zwar so, dass der Anwender zu jeder
+				Zeit feststellen kann, wo sich seine Daten befinden. Als Ergebnis
+				strebt das Projekt eine Lösung an, die vorhandene Daten verteilt und
+				damit sicher und verschlüsselt – über mehrere Cloud-Anbieter hinweg
+				– abspeichert.</p>
+
+			<h3>Projektverantwortlichkeiten</h3>
+
+			<p>Die wissenschaftliche Verantwortlichkeit des „SeDiCo“-Projekts
+				liegt beim Leiter des Instituts für Unternehmensinformatik Professor
+				Dr. Thomas Specht. Jens Kohler, Master of Science, betreut das
+				Projekt auf inhaltlicher und administrativer Ebene. Das Institut für
+				Unternehmensinformatik ist eines der sieben Institute der Fakultät
+				für Informatik der Hochschule Mannheim.</p>
+
+			<p>
+				Lesen Sie auch die ausführliche Projektbeschreibung auf der <a
+					href="http://ksf.mfg.de/de/projekte/konfit-ssc/2.1080"
+					target="_blank">Website der MFG Medien- und Filmgesellschaft
+					Baden-Württemberg mbH</a>.
+			</p>
+	</div>
+
+	
+	<ui:include src="inc/footer_noLogout.xhtml" />
+</h:body>
+</html>

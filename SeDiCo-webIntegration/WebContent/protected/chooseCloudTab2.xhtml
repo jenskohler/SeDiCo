@@ -1,0 +1,166 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<p:tab id="tab2" title="Eucalyptus" disabled="#{amazonCloudService.disableTab1}">
+	<h:form>
+			<h:panelGrid columns="2">
+
+				<h:outputLabel for="eca_access-key">Access-Key:</h:outputLabel>
+				<p:inputText id="eca_access-key" size="50"
+					value="#{eucaCloudService.ecaAccessKey}"  required="true" />
+				
+	
+				<h:outputLabel for="eca_user-key">User-Key:</h:outputLabel>
+				<p:password id="eca_user-key" size="50"
+					value="#{eucaCloudService.ecaUserKey}"  required="true" redisplay="true"/>
+				
+	
+			</h:panelGrid>
+			<h:panelGrid>
+			</h:panelGrid>
+			<h:message for="eca_access-key" />
+			<h:message for="eca_user-key" />
+			<h:panelGrid columns="1">
+			<p:fieldset legend="(experimental)" > 
+			<h:panelGrid columns="1" style="margin-bottom:10px">
+				<h:outputText id="chooseCloudOSeucalyptus1" value="Cloud OS: " />
+				<p:selectOneMenu id="cloudOSChooseeucalyptus1" style="width:205px">
+					<f:selectItem itemLabel="Ubuntu" itemValue="UBUNTU" />
+					<f:selectItem itemLabel="Windows" itemValue="WINDOWS" />
+					<f:selectItem itemLabel="CentOS" itemValue="CENTOS" />
+					<f:selectItem itemLabel="Debian" itemValue="DEBIAN" />
+				</p:selectOneMenu>
+			</h:panelGrid>
+				
+				<h:panelGrid columns="1" style="margin-bottom:10px">
+					<h:outputText value="RAM (MB): " />
+					<p:inputText id="chooseCloudRameucalyptus1"
+						value="#{eucaCloudService.euca1ram}" />
+					<p:slider for="chooseCloudRameucalyptus1" minValue="128"
+						maxValue="8192" step="128" />
+				</h:panelGrid>
+
+				<h:outputText value="# Procs (GHz): " />
+				<h:panelGrid columns="1" style="margin-bottom:10px">
+					<p:inputText id="cloudProcseucalyptus1"
+						value="#{eucaCloudService.euca1procs}" />
+					<p:slider for="cloudProcseucalyptus1" step="2" minValue="1"
+						maxValue="12" />
+				</h:panelGrid>
+
+				<h:outputText value="HD (GB):  " />
+				<h:panelGrid columns="1" style="margin-bottom:10px">
+					<p:inputText id="chooseCloudHdeucalyptus1"
+						value="#{eucaCloudService.euca1harddisk}" />
+					<p:slider for="chooseCloudHdeucalyptus1" minValue="1"
+						maxValue="4000" step="1" />
+				</h:panelGrid>
+				
+			</p:fieldset>
+
+				<h:commandButton value="Search Resources"
+					action="#{eucaCloudService.cloudLogin}" />
+				
+
+
+			</h:panelGrid>
+			
+				<p:tabView rendered="#{eucaCloudService.showCloudTab}">
+					<p:tab id="tab21" title="Instances" >
+						<p:outputPanel id="tab31Panel" width="750" cellpadding="5">
+						<h:form>
+							<p:selectOneMenu id="euca21customRadio" style="width:700px"  filter="true" filterMatchMode="startsWith" panelStyle="width:200px"
+								value="#{eucaCloudService.selectedEca1ImageId}" layout="custom">
+								<p:ajax event="change" listener="#{eucaCloudService.changeVMSelection1}" update="publicEcaIp1"/>
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{eucaCloudService.myNodesEuca}" var="nodes"
+									itemValue="#{nodes.id}" itemLabel="#{nodes.id}"
+									noSelectionValue="#" />
+								
+							</p:selectOneMenu>
+							
+							<h:panelGrid columns="2" style="margin-bottom:10px">
+								<h:outputText value="Public IP: " />
+								<p:inputText id="publicEcaIp1" value="#{eucaCloudService.publicIp1}"/>
+								
+								<h:outputText value="Port: " />
+								<p:inputText value="#{eucaCloudService.port1}"/>
+								
+								<h:outputText value="DB-Name: " />
+								<p:inputText value="#{eucaCloudService.dbName1}"
+									 />
+								
+								<h:outputText value="PartitionName: " />
+									<p:inputText value="#{eucaCloudService.partitionName1}"
+										 />
+								
+								<h:outputText value="DB-User: " />
+									<p:inputText value="#{eucaCloudService.dbUser1}"
+										 />
+								
+								<h:outputText value="Password: " />
+								<p:password value="#{eucaCloudService.dbPassword1}" redisplay="true"
+									 />
+						
+								<h:outputText value="DB-Type: " />
+						        <p:selectOneMenu  id="ecaDBTypePart1"
+						           noSelectionValue="#" value="#{eucaCloudService.dbType1}" 
+						           >
+						           <p:ajax event="change" listener="#{eucaCloudService.changeDatabaseSelection1}" update="ecaDBTypePart1"/>
+						            <f:selectItem itemLabel="MySQL" itemValue="mysql" />  
+						            <f:selectItem itemLabel="Oracle" itemValue="oracle" />   
+						        </p:selectOneMenu>  
+														
+								<h:commandButton value="Use Instance"
+									action="#{eucaCloudService.loadInstanceData1}" disabled="#{eucaCloudService.disableTab1}">
+								</h:commandButton>		
+									<br />		
+									<br />	
+							</h:panelGrid>
+				</h:form>
+							
+							
+						</p:outputPanel>
+							
+							
+							
+					</p:tab>
+		
+					<p:tab id="tab22" title="Templates (experimental)">
+						<p:outputPanel id="tab22Panel" width="750">
+							<p:selectOneMenu id="euca22TemplateRadio" style="width:700px"  filter="true" filterMatchMode="startsWith" panelStyle="width:200px"
+								value="#{eucaCloudService.selectedTemplateEuca1}" layout="custom">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{eucaCloudService.selectedTemplateEuca1}"
+									var="templates" itemValue="#{templates}" 
+									itemLabel="ID: #{templates.hardware.id} || Procs: #{templates.hardware.processors} || RAM: #{templates.hardware.ram} || Vols: #{templates.hardware.volumes}"
+									noSelectionValue="#" />
+
+							</p:selectOneMenu>
+						</p:outputPanel>
+					</p:tab>
+					<p:tab id="tab23" title="Images (experimental)">
+						<p:outputPanel id="tab23Panel" width="750">
+						<h:outputText value="Found Images: #{eucaCloudService.foundImages}" />
+							<p:selectOneMenu id="custom23RadioImages" style="width:700px"  filter="true" filterMatchMode="startsWith" panelStyle="width:200px"
+								value="#{eucaCloudService.selectedImageEuca1}" layout="custom">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{eucaCloudService.myImagesEuca}"
+									var="images" itemValue="#{images}" itemLabel="#{images.name}"
+									noSelectionValue="#" />
+
+							</p:selectOneMenu>
+						</p:outputPanel>
+					</p:tab>
+					
+				</p:tabView>
+				</h:form>
+	</p:tab>
+
+</ui:composition>

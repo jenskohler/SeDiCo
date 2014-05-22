@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:c="http://java.sun.com/jsp/jstl/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="refresh" content="15" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Expires" content="0" />
+		<link rel="stylesheet" type="text/css" href="/SeDiCo-webIntegration/css/defaultStyle.css" ></link>
+		
+		<title>Logout</title>
+	</h:head>
+	
+	<h:body>
+		<div id="container">
+			<div id="head">
+	
+				<a href="protected/protected_index.xhtml"><img src="/SeDiCo-webIntegration/img/head_logo.png"
+					alt="SeDiCo ." /></a>
+	
+				<ul id="navi">
+					<li><h:link outcome="protected/protected_index.xhtml" value="Login" /></li>
+				</ul>
+	
+			</div>
+		</div>
+		<div id="content">
+
+	    <p>Please check your user and password</p>
+	   
+	    <h:form>
+	    	
+		 	<h:button outcome="protected/protected_index.xhtml" value="Return to start" />
+		</h:form>
+		</div>
+		<ui:include src="inc/footer_noLogout.xhtml" />
+	</h:body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+ 
+    <h:head>
+        I am public!
+    </h:head>
+    <h:body>
+        Everyone can see me.
+        
+        <p>Login to access secure pages:</p>
+    <form method="post" action="j_security_check" name="loginForm">
+        <h:panelGrid columns="2">
+        <h:messages errorClass="errorMessage" infoClass="infoMessage"
+							warnClass="warnMessage"></h:messages>
+           
+           <h:panelGroup>
+            <h:outputLabel value="Username" />
+           <!--  <input type="text" name="j_username" />  -->
+            <h:inputText id="j_username" autocomplete="off"  />
+            <h:outputLabel value="Password" />
+          <!--  <input type="password" name="j_password" /> -->
+            <h:inputSecret id="j_password" autocomplete="off" />
+             </h:panelGroup>
+            <h:panelGroup>
+             	<h:commandButton type="submit" value="Login"/>
+             	<!--  <input type="submit" name="submit" value="Login" />  -->
+            	<h:commandButton type="reset" value="Clear"/>
+            </h:panelGroup>
+            
+        </h:panelGrid>
+        <br />
+    </form>
+    </h:body>
+</html>

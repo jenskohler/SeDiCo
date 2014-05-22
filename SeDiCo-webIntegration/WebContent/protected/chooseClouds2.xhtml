@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Welcome to SeDiCo!</title>
+	<link rel="stylesheet" type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/css/defaultStyle.css"></link> 
+		
+</h:head>
+
+
+<h:body>
+	<ui:include src="/inc/header_noLinks.xhtml" />
+
+	<div id="content">
+
+		<h2>
+			Hello
+			<h:outputLabel value="#{request.userPrincipal.name}"></h:outputLabel>
+		</h2>
+	
+		
+			<br />
+			<p:fieldset id="selectPartition1" legend="Partition 1"
+				style="margin-top:20px">
+				<p:outputPanel id="dropArea1">
+					<h:outputText value="!!!Drop here!!!"
+						rendered="#{empty treeBean.tableColHeaderListPartition1}"
+						style="font-size:24px;" />
+
+					<p:dataGrid id="availableColumnsPartition1" var="cos"
+						value="#{treeBean.tableColHeaderListPartition1}"
+						draggableColumns="true" columns="3">
+						<p:column>
+							<p:panel id="availableColumnsPartition1" header="#{cos.label}" />
+
+						</p:column>
+					</p:dataGrid>
+				</p:outputPanel>
+			</p:fieldset>
+			
+			<c:choose>
+				<c:when test="#{treeBean.cloudProvider1 == 'Amazon'}" > <ui:include src="amazonGUI1.xhtml" /></c:when>
+
+				<c:otherwise><ui:include src="eucaGUI1.xhtml" /></c:otherwise>
+			</c:choose>
+
+			<br />
+
+			<p:fieldset id="selectPartition2" legend="Partition 2"
+				style="margin-top:20px">
+				<p:outputPanel id="dropArea2">
+					<h:outputText value="!!!Drop here!!!"
+						rendered="#{empty treeBean.tableColHeaderListPartition2}"
+						style="font-size:24px;" />
+
+					<p:dataGrid id="availableColumnsPartition2" var="cos"
+						value="#{treeBean.tableColHeaderListPartition2}"
+						draggableColumns="true" columns="3">
+						<p:column>
+							<p:panel id="availableColumnsPartition2" header="#{cos.label}" />
+
+						</p:column>
+					</p:dataGrid>
+				</p:outputPanel>
+			</p:fieldset>
+			<c:choose>
+				<c:when test="#{treeBean.cloudProvider2 == 'Amazon'}" > <ui:include src="amazonGUI2.xhtml" /></c:when>
+
+				<c:otherwise><ui:include src="eucaGUI2.xhtml" /></c:otherwise>
+			</c:choose>
+			
+			<h:form>
+				<h:commandButton value="Distribute Data" action="#{amazonCloudService.writeTODB}" />
+				
+				<h:outputLabel id="divideSuccessString" value="#{amazonCloudService.divideSuccessMessage} " />
+				
+				<h:commandButton value="End" action="#{divideDataAction.forwardToEnd}" />
+			</h:form>				
+			
+	</div>
+	<ui:include src="/inc/foot.xhtml" />
+</h:body>
+</html>
