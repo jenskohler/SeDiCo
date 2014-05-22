@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<config>
+	<source>
+	    <publicIP>141.19.142.172</publicIP>
+        <port>1521</port>
+        <database>jens</database>
+        <table>Customer</table>
+        <user>system</user>
+        <password>jenskohler</password>
+        <sqlType>Oracle</sqlType>
+	</source>
+	<targets>
+		<target isPrimary="true">
+			<name>TestPartition1</name>
+			<publicIP>localhost</publicIP>
+			<port>3306</port>
+			<database>SeDiCo1</database>
+			<table>Customer</table>
+			<user>root</user>
+			<password>jenskohler</password>
+			<sqlType>MySQL</sqlType>
+			<partition>
+				<column>NAME</column>
+				<column>FORENAME</column>
+				<column>DATEOFBIRTH</column>
+				<column>STREET</column>
+				<column>ZIP</column>
+			</partition>
+		</target>
+		<target>
+			<name>TestPartition2</name>
+			<publicIP>localhost</publicIP>
+			<port>3306</port>
+			<database>SeDiCo2</database>
+			<table>Customer</table>
+			<user>root</user>
+			<password>jenskohler</password>
+			<sqlType>MySQL</sqlType>
+			<partition>				
+				<column>CREDITCARD</column>
+				<column>INSURANCENO</column>
+				<column>SOLSCORE</column>
+				<column>REGCUST</column>
+			</partition>
+		</target>
+	</targets>
+</config>
