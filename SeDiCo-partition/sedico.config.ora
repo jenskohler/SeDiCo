@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<source>
+	<publicIP>141.19.142.172</publicIP>
+	<port>1521</port>
+	<database>xe</database>
+	<table>CUSTOMER</table>
+	<user>jens</user>
+	<password>jenskohler</password>
+	<sqlType>Oracle</sqlType>
+</source>
+<targets>
+<target>
+	<publicIP>54.213.122.239</publicIP>
+	<port>3306</port>
+	<database>test1</database>
+	<table>Customer</table>
+	<user>jens</user>
+	<password>jenskohler</password>
+	<sqlType>MySQL</sqlType>
+	<partition>
+	<column>ID</column>
+	<column>NAME</column>
+	<column>DATEOFBIRTH</column>
+	<column>INSURANCENO</column>
+	<column>STREET</column>
+	</partition>
+</target>
+<target>
+	<publicIP>54.213.122.239</publicIP>
+	<port>3306</port>
+	<database>test2</database>
+	<table>Customer</table>
+	<user>jens</user>	
+	<password>jenskohler</password>
+	<sqlType>MySQL</sqlType>
+	<partition>
+	<column>ID</column>
+	<column>FORENAME</column>
+	<column>CREDITCARD</column>
+	<column>ZIP</column>
+	<column>REGCUST</column>
+	<column>SOLSCORE</column>
+	</partition>
+</target>
+</targets>
+</configuration>

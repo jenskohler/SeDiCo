@@ -1,0 +1,69 @@
+package com.sedico.partition;
+
+import com.sedico.*;
+import com.sedico.sql.*;
+import com.sedico.sql.writing.SQLWriteStrategy;
+import com.sedico.sql.writing.SQLWriteStrategyFactory;
+
+import java.util.*;
+
+public class TableWriter {
+
+    private final TableStrategy tableStrategy;
+    private final List<SQLWriteStrategy> exportStrategies;
+
+    public TableWriter() {
+        List<PartitionDescriptor> partitions = Configuration.getPartitions();
+        exportStrategies = SQLWriteStrategyFactory.createSqlWriteStrategies(partitions);
+        PartitionerStrategy partitioner = new PartitionByColumnNamesStrategy(partitions);
+        tableStrategy = new SQLTableStrategy(partitioner);
+    }
+
+    public void createTable(Table table) {
+        checkSanity(table);
+
+        for (SQLWriteStrategy strategy : exportStrategies) {
+            strategy.createTable(table);
+        }
+    }
+
+    public void insert(Table table) {
+        checkSanity(table);
+
+        Iterable<PartitionedTable> tables = tableStrategy.getPartitionedTables(table);
+        for (PartitionedTable partitionedTable : tables) {
+            SQLWriteStrategy strategy = exportStrategies.get(partitionedTable.getPartition());
+            strategy.insertTable(partitionedTable.getTable());
+        }
+    }
+
+    public void delete(Table table) {
+        checkSanity(table);
+
+        Iterable<PartitionedTable> tables = tableStrategy.getPartitionedTables(table);
+        for (PartitionedTable partitionedTable : tables) {
+            SQLWriteStrategy strategy = exportStrategies.get(partitionedTable.getPartition());
+            strategy.deleteTable(partitionedTable.getTable());
+        }
+    }
+
+    public void update(Table table) {
+        checkSanity(table);
+
+        Iterable<PartitionedTable> tables = tableStrategy.getPartitionedTables(table);
+        for (PartitionedTable partitionedTable : tables) {
+            SQLWriteStrategy strategy = exportStrategies.get(partitionedTable.getPartition());
+            strategy.updateTable(partitionedTable.getTable());
+        }
+    }
+
+    private void checkSanity(Table table) {
+        if (table.getRows().size() < exportStrategies.size() - 1) {
+            throw new IllegalStateException("Sie haben mehr Exportstrategien als Tabellenspalten. " +
+                    "Das ist nicht vorgesehen, denn mit dieser Konfiguration würden einige leere Tabellen entstehen.");
+        }
+        if (exportStrategies.size() < 2) {
+            throw new IllegalStateException("Sie müssen mindestens zwei Exportstrategien angeben. Die Benutzung einer einzigen Strategie hat keinen Nutzen.");
+        }
+    }
+}
