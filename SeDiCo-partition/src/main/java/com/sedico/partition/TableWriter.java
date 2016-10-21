@@ -42,11 +42,11 @@ public class TableWriter {
 
         Iterable<PartitionedTable> tables = tableStrategy.getPartitionedTables(table);
         //System.out.println("Table Rows: " +table.getRows().size());
-        for (Row row : table.getRows()) {
-            for (Column column : row.getColumns()) {
-            	//System.out.println(column.getColumnName() + column.getColumnValue());
-            }
-        }
+//        for (Row row : table.getRows()) {
+//            for (Column column : row.getColumns()) {
+//            	//System.out.println(column.getColumnName() + column.getColumnValue());
+//            }
+//        }
         for (PartitionedTable partitionedTable : tables) {
             SQLWriterStrategy strategy = exportStrategies.get(partitionedTable.getPartition());
             strategy.insertTable(partitionedTable.getTable());

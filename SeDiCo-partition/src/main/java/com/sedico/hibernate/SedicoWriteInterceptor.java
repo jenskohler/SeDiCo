@@ -82,7 +82,11 @@ public class SedicoWriteInterceptor implements PreInsertEventListener, PreUpdate
               
                 columnDescriptors.add(descriptor);
                 if (propertyValue != null) {
-                	columns.add(new Column(propertyColumnName, propertyValue.toString()));
+                	if(propertyValue instanceof Date){
+                		columns.add(new Column(propertyColumnName, propertyValue));
+                	}else{
+                		columns.add(new Column(propertyColumnName, propertyValue.toString()));
+                	}
                 }
                 else {
                 	columns.add(new Column(propertyColumnName, null));

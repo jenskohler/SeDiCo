@@ -13,6 +13,7 @@ import java.util.*;
  */
 public abstract class SQLReaderStrategyBase implements SQLReaderStrategy {
     private final PartitionDescriptor settings;
+    private static Connection connection;
 
     public SQLReaderStrategyBase(PartitionDescriptor settings) {
         this.settings = settings;
@@ -33,16 +34,19 @@ public abstract class SQLReaderStrategyBase implements SQLReaderStrategy {
     }
    
     protected abstract SQLBuilder createSQLBuilder();
+
     /**
-     * Diese Methode fÃ¼gt jedem Spaltenbeschreiber eine Spalte hinzu.
+     * Diese Methode fügt jedem Spaltenbeschreiber eine Spalte hinzu.
      * @param statementText - String
      * @param table - Tabelle
-     * @return row - Zeile mit den hinzugefÃ¼gten Spalten
+     * @return row - Zeile mit den hinzugefügten Spalten
      */
     private Row execute(String statementText, Table table) {
         List<Column> columns = new ArrayList();
-        try {
-            try(Connection connection = DriverManager.getConnection(settings.getConnectionString(), settings.getUser(), settings.getPassword())) {
+        try {            
+            	if(connection==null){
+            		connection = DriverManager.getConnection(settings.getConnectionString(), settings.getUser(), settings.getPassword());
+            	}
                 Statement statement = connection.createStatement();
                 try(ResultSet resultSet = statement.executeQuery(statementText)) {
                     while(resultSet.next()) {
@@ -52,8 +56,7 @@ public abstract class SQLReaderStrategyBase implements SQLReaderStrategy {
                             columns.add(new Column(descriptor.getColumnName(), value));
                         }
                     }
-                }
-            }
+                }       
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -27,8 +27,10 @@ public class HibernateUtil {
         Configuration configuration = SedicoBootstrapper.getHibernateConfiguration()
 
             //Generiertes SQL auf Console ausgeben
-            .setProperty("hibernate.show_sql", "true")
+            //.setProperty("hibernate.show_sql", "true")
+            .setProperty("format.sql", "true")
             .setProperty("hibernate.current_session_context_class", "thread")
+            //.setProperty("hibernate.generate_statistics", "true")
 
             //Customer als Entität registrieren
            // .addAnnotatedClass(CustomerTest.class);

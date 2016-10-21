@@ -7,7 +7,7 @@ import java.util.*;
  *
  */
 public interface SQLBuilder {
-    String buildCreateTable(Table table, String databaseName);
+    String buildCreateTable(Table table, String databaseName,boolean isPrimaryPartition);
 
     List<String> buildInserts(Table table, String databaseName);
 

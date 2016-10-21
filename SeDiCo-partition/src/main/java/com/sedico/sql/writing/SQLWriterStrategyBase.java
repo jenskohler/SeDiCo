@@ -11,7 +11,7 @@ import java.util.*;
  * @author jens
  *
  */
-public abstract class SQLWriterStrategyBase implements SQLWriterStrategy {
+public abstract class SQLWriterStrategyBase implements SQLWriterStrategy  {
 
     private final PartitionDescriptor settings;
 
@@ -25,7 +25,7 @@ public abstract class SQLWriterStrategyBase implements SQLWriterStrategy {
     public void createTable(Table table) {
         Table newTable = new Table(settings.getTable(), table.getRows(), table.getColumnDescriptors());
         SQLBuilder builder = createSQLBuilder();
-        String create = builder.buildCreateTable(newTable, settings.getDatabase());
+        String create = builder.buildCreateTable(newTable, settings.getDatabase(),settings.isPrimary());
         List<String> creates = new ArrayList();
         creates.add(create);
         execute(creates);
@@ -66,12 +66,32 @@ public abstract class SQLWriterStrategyBase implements SQLWriterStrategy {
      * @param statementTexts - Liste von Strings
      */
     private void execute(List<String> statementTexts) {
-        try {
+        
+    	final Statement statement;
+    	try {
             try(Connection connection = DriverManager.getConnection(settings.getConnectionString(), settings.getUser(), settings.getPassword())) {
-                Statement statement = connection.createStatement();
+                statement = connection.createStatement();
+                
+                
+                /*
                 for (String statementText : statementTexts) {
                     statement.addBatch(statementText);
                 }
+                */
+                
+                Parallel.For(statementTexts, 
+                		 // The operation to perform with each item
+                		 new Parallel.Operation<String>() {
+                		    public void perform(String statementText) {
+                		    	try {
+									statement.addBatch(statementText);
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+                		    };
+                		});
+                
                 statement.executeBatch();
                 connection.close();
             }

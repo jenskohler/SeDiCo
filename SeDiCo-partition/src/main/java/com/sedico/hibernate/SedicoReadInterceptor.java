@@ -151,6 +151,9 @@ public class SedicoReadInterceptor implements PreLoadEventListener {
             if (t.equals("timestamp")) {
             	s = s.replace("-", "/");
             }
+            if (t.equals("date")) {
+            	s = s.replace("-", "/");
+            }
             else {
             	value = type.fromString(value.toString());
             }
